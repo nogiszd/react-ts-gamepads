@@ -53,5 +53,10 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/nogiszd/react-ts-gamepads.git"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
   }
 }
