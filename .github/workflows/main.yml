@@ -1,4 +1,5 @@
 name: ci/cd to npm
+on: [workflow_run]
 jobs:
   build:
     runs-on: ubuntu-latest
