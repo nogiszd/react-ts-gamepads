@@ -29,7 +29,7 @@ import { useState } from 'react';
 import { useGamepads, GamepadRef } from 'react-ts-gamepads';
 
 const App = () => {
-  const [gamepads, setGamepads] = useState < GamepadRef > {};
+  const [gamepads, setGamepads] = useState<GamepadRef>({});
   useGamepads(gamepads => setGamepads(gamepads));
 
   return <div>{gamepads[0].buttons[4].pressed}</div>;
