@@ -1,4 +1,4 @@
-name: (ci/cd) publish to npm
+name: (ci/cd) force publish to npm
 on: workflow_dispatch
 jobs:
   build:
@@ -27,6 +27,6 @@ jobs:
         run: yarn build
 
       - name: Publish
-        run: yarn publish
+        run: yarn publish --force
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
