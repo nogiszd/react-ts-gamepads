@@ -44,5 +44,9 @@
     "tsdx": "^0.14.1",
     "tslib": "^2.4.1",
     "typescript": "^4.9.4"
+  },
+  "repository": {
+    "url": "https://github.com/nogiszd/react-ts-gamepads.git",
+    "type": "github"
   }
 }
