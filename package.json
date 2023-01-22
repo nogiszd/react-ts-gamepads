@@ -1,7 +1,7 @@
 {
   "name": "react-ts-gamepads",
   "description": "Library that enables users to consume Gamepad API inside React",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "nogiszd",
   "license": "MIT",
   "main": "dist/index.js",
@@ -19,7 +19,10 @@
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
-    "prepare": "tsdx build"
+    "prepare": "tsdx build",
+    "bump:major": "npm version major",
+    "bump:minor": "npm version minor",
+    "bump:patch": "npm version patch"
   },
   "peerDependencies": {
     "react": ">=16"
