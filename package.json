@@ -1,0 +1,51 @@
+{
+  "name": "react-ts-gamepads",
+  "description": "Library that enables users to consume Gamepad API inside React",
+  "version": "1.0.0",
+  "author": "nogiszd",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "module": "dist/react-ts-gamepads.esm.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build"
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "husky": "^8.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.4.1",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "semantic-release": "^20.0.2"
+  }
+}
