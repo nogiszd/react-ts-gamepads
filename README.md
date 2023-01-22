@@ -1,8 +1,8 @@
-# react-ts-gamepads 🎮➡️⚛️
+# react-ts-gamepads 🎮 ➡️ ⚛️
 
-> Lightweight library to support Gamepad API in modern React ⚛️
+> Library to support Gamepad API in modern React ⚛️
 
-This is a fork of [react-gamepads](https://github.com/whoisryosuke/react-gamepads) with detailed TypeScript types and updated libraries.
+This is a maintained fork of [react-gamepads](https://github.com/whoisryosuke/react-gamepads) with detailed TypeScript types and updated libraries.
 
 <div align="center">
 
