@@ -1,4 +1,4 @@
-# react-ts-gamepads 🎮 ➡️ ⚛️
+# react-ts-gamepads 🎮➡️⚛️
 
 > Library to support Gamepad API in modern React ⚛️
 
@@ -6,7 +6,7 @@ This is a maintained fork of [react-gamepads](https://github.com/whoisryosuke/re
 
 <div align="center">
 
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![Typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![Typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge) ![npm](https://img.shields.io/npm/dw/react-ts-gamepads?color=red&logo=npm&style=for-the-badge)
 
 </div>
 
