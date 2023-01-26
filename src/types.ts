@@ -8,5 +8,5 @@ export interface GamepadRef {
 
 export interface GamepadContext {
   gamepads?: Gamepads;
-  setGamepads?: React.Dispatch<React.SetStateAction<Gamepads | undefined>>;
+  setGamepads?: React.Dispatch<React.SetStateAction<Gamepads>>;
 }
