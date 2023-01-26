@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type Gamepads = Record<Gamepad['index'], Omit<Gamepad, 'index'>>;
+export type Gamepads = Record<Gamepad['index'], Gamepad>;
 
 export interface GamepadRef {
   [key: number]: Gamepad;
