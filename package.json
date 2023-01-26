@@ -1,7 +1,7 @@
 {
   "name": "react-ts-gamepads",
   "description": "Library that enables users to consume Gamepad API inside React",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "nogiszd",
   "license": "MIT",
   "main": "dist/index.js",
