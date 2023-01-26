@@ -7,12 +7,12 @@ import React, {
   useState,
 } from 'react';
 import { haveGamepadEvents } from './haveGamepadEvents';
-import { GamepadContext, GamepadEntities } from './types';
+import { GamepadContext, Gamepads } from './types';
 
 const GamepadsContext = createContext<GamepadContext>({});
 
 const GamepadsProvider = ({ children }: PropsWithChildren<unknown>) => {
-  const [gamepads, setGamepads] = useState<GamepadEntities>();
+  const [gamepads, setGamepads] = useState<Gamepads>();
   const requestRef = useRef<number>();
 
   const addGamepad = useCallback(
@@ -23,6 +23,10 @@ const GamepadsProvider = ({ children }: PropsWithChildren<unknown>) => {
           buttons: gamepad.buttons,
           id: gamepad.id,
           axes: gamepad.axes,
+          connected: gamepad.connected,
+          hapticActuators: gamepad.hapticActuators,
+          mapping: gamepad.mapping,
+          timestamp: gamepad.timestamp,
         },
       }));
     },
