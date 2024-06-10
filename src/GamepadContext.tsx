@@ -6,7 +6,6 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { haveGamepadEvents } from './haveGamepadEvents';
 import { GamepadContext, Gamepads } from './types';
 
 const GamepadsContext = createContext<GamepadContext>({});
@@ -14,6 +13,9 @@ const GamepadsContext = createContext<GamepadContext>({});
 const GamepadsProvider = ({ children }: PropsWithChildren<unknown>) => {
   const [gamepads, setGamepads] = useState<Gamepads>({});
   const requestRef = useRef<number>();
+
+  const hasGamepadEvents =
+    typeof window !== 'undefined' && 'ongamepadconnected' in window;
 
   const addGamepad = useCallback(
     (gamepad: Gamepad) => {
@@ -69,12 +71,12 @@ const GamepadsProvider = ({ children }: PropsWithChildren<unknown>) => {
 
   // Update gamepad state on each "tick"
   const update = useCallback(() => {
-    if (!haveGamepadEvents) {
+    if (!hasGamepadEvents) {
       scanGamepads();
     }
 
     requestRef.current = requestAnimationFrame(update);
-  }, [requestRef, scanGamepads, haveGamepadEvents]);
+  }, [requestRef, scanGamepads, hasGamepadEvents]);
 
   useEffect(() => {
     requestRef.current = requestAnimationFrame(update);

@@ -1,10 +1,12 @@
-import { useEffect, useRef } from 'react';
-import { haveGamepadEvents } from './haveGamepadEvents';
+import { useCallback, useEffect, useRef } from 'react';
 import { GamepadRef } from './types';
 
 const useGamepads = (cb?: (data: GamepadRef) => void) => {
   const gamepads = useRef<GamepadRef>({});
   const request = useRef<number>();
+
+  const hasGamepadEvents =
+    typeof window !== 'undefined' && 'ongamepadconnected' in window;
 
   const addGamepad = (gamepad: Gamepad) => {
     gamepads.current = {
@@ -56,12 +58,12 @@ const useGamepads = (cb?: (data: GamepadRef) => void) => {
   }, []);
 
   // Update gamepad state on each "tick"
-  const update = () => {
-    if (!haveGamepadEvents) {
+  const update = useCallback(() => {
+    if (!hasGamepadEvents) {
       scanGamepads();
     }
     request.current = requestAnimationFrame(update);
-  };
+  }, [hasGamepadEvents]);
 
   useEffect(() => {
     request.current = requestAnimationFrame(update);
