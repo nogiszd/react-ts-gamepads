@@ -12,14 +12,14 @@ const GamepadsContext = createContext<GamepadContext>({});
 
 const GamepadsProvider = ({ children }: PropsWithChildren<unknown>) => {
   const [gamepads, setGamepads] = useState<Gamepads>({});
-  const requestRef = useRef<number>();
+  const requestRef = useRef<number | null>(null);
 
   const hasGamepadEvents =
     typeof window !== 'undefined' && 'ongamepadconnected' in window;
 
   const addGamepad = useCallback(
     (gamepad: Gamepad) => {
-      setGamepads(oldGamepads => ({
+      setGamepads((oldGamepads) => ({
         ...oldGamepads,
         [gamepad.index]: {
           ...gamepad,
@@ -50,7 +50,7 @@ const GamepadsProvider = ({ children }: PropsWithChildren<unknown>) => {
       : [];
 
     // Loop through all existing controllers and add to the state
-    detectedGamepads.forEach(gamepad => {
+    detectedGamepads.forEach((gamepad) => {
       if (gamepad) {
         addGamepad(gamepad);
       }

@@ -3,7 +3,7 @@ import { GamepadRef } from './types';
 
 const useGamepads = (cb?: (data: GamepadRef) => void) => {
   const gamepads = useRef<GamepadRef>({});
-  const request = useRef<number>();
+  const request = useRef<number | null>(null);
 
   const hasGamepadEvents =
     typeof window !== 'undefined' && 'ongamepadconnected' in window;
@@ -38,7 +38,7 @@ const useGamepads = (cb?: (data: GamepadRef) => void) => {
       : [];
 
     // Loop through all existing controllers and add to the state
-    detectedGamepads.forEach(gamepad => {
+    detectedGamepads.forEach((gamepad) => {
       const newGamepads = gamepad;
 
       if (newGamepads && newGamepads !== null) {
