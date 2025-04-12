@@ -15,7 +15,9 @@ const useGamepads = (cb?: (data: GamepadRef) => void) => {
     };
 
     // Send data to provided callback
-    typeof cb === 'function' && cb(gamepads.current);
+    if (typeof cb === 'function') {
+      cb(gamepads.current);
+    }
   };
 
   /**
