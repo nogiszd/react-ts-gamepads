@@ -18,7 +18,7 @@
     "start": "tsup --watch",
     "build": "tsup",
     "lint": "eslint src --ext .ts,.tsx",
-    "prepare": "tsup",
+    "prepare": "husky",
     "bump:major": "npm version major",
     "bump:minor": "npm version minor",
     "bump:patch": "npm version patch"
