@@ -1,5 +1,6 @@
 const tseslint = require('@typescript-eslint/eslint-plugin');
 const tsParser = require('@typescript-eslint/parser');
+const prettier = require('eslint-plugin-prettier');
 
 /** @type {import("eslint").Linter.Config[]} */
 module.exports = [
@@ -15,6 +16,7 @@ module.exports = [
     },
     plugins: {
       '@typescript-eslint': tseslint,
+      prettier: prettier,
     },
     rules: {
       ...tseslint.configs.recommended.rules,

@@ -46,8 +46,8 @@ const GamepadsProvider = ({ children }: PropsWithChildren<unknown>) => {
     const detectedGamepads = navigator.getGamepads
       ? navigator.getGamepads()
       : navigator.webkitGetGamepads
-      ? navigator.webkitGetGamepads()
-      : [];
+        ? navigator.webkitGetGamepads()
+        : [];
 
     // Loop through all existing controllers and add to the state
     detectedGamepads.forEach((gamepad) => {
