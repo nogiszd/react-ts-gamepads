@@ -5,8 +5,7 @@ const useGamepads = (cb?: (data: GamepadRef) => void) => {
   const gamepads = useRef<GamepadRef>({});
   const request = useRef<number | null>(null);
 
-  const hasGamepadEvents =
-    typeof window !== 'undefined' && 'ongamepadconnected' in window;
+  const isNotSsr = typeof window !== 'undefined';
 
   const addGamepad = (gamepad: Gamepad) => {
     gamepads.current = {
@@ -55,20 +54,23 @@ const useGamepads = (cb?: (data: GamepadRef) => void) => {
   useEffect(() => {
     window.addEventListener('gamepadconnected', connectGamepadHandler);
 
-    return () =>
+    return () => {
       window.removeEventListener('gamepadconnected', connectGamepadHandler);
+    };
   }, []);
 
   // Update gamepad state on each "tick"
   const update = useCallback(() => {
-    if (!hasGamepadEvents) {
+    if (isNotSsr) {
       scanGamepads();
     }
+
     request.current = requestAnimationFrame(update);
-  }, [hasGamepadEvents]);
+  }, [isNotSsr]);
 
   useEffect(() => {
     request.current = requestAnimationFrame(update);
+
     return () => cancelAnimationFrame(request.current!);
   }, []);
 
