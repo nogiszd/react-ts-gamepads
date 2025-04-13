@@ -1,17 +1,19 @@
-name: (ci/cd) publish to npm
+name: (ci/cd) build & publish to npm
 on: workflow_dispatch
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      artifact-name: ${{ steps.set-artifact-name.outputs.name }}
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Use Node 18.x
+      - name: Use Node 20.x
         uses: actions/setup-node@v3
         with:
-          node-version: 18.x
+          node-version: 20.x
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies (with cache)
@@ -25,6 +27,39 @@ jobs:
 
       - name: Build
         run: yarn build
+
+      - name: Set artifact name
+        id: set-artifact-name
+        run: echo "name=build-dist" >> "$GITHUB_OUTPUT"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-dist
+          path: dist/
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Use Node 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies (without rebuild)
+        uses: bahmutov/npm-install@v1
+
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build-dist
+          path: dist/
 
       - name: Publish
         run: yarn publish
