@@ -40,10 +40,8 @@ const useGamepads = (cb?: (data: GamepadRef) => void) => {
 
     // Loop through all existing controllers and add to the state
     detectedGamepads.forEach((gamepad) => {
-      const newGamepads = gamepad;
-
-      if (newGamepads && newGamepads !== null) {
-        addGamepad(newGamepads);
+      if (gamepad) {
+        addGamepad(gamepad);
       }
     });
   };

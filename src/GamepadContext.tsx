@@ -76,7 +76,7 @@ const GamepadsProvider = ({ children }: PropsWithChildren<unknown>) => {
     }
 
     requestRef.current = requestAnimationFrame(update);
-  }, [isNotSsr]);
+  }, [isNotSsr, scanGamepads]);
 
   useEffect(() => {
     requestRef.current = requestAnimationFrame(update);
