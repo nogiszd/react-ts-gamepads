@@ -1,10 +1,11 @@
-import { useEffect, useRef } from 'react';
-import { haveGamepadEvents } from './haveGamepadEvents';
+import { useCallback, useEffect, useRef } from 'react';
 import { GamepadRef } from './types';
 
 const useGamepads = (cb?: (data: GamepadRef) => void) => {
   const gamepads = useRef<GamepadRef>({});
-  const request = useRef<number>();
+  const request = useRef<number | null>(null);
+
+  const isNotSsr = typeof window !== 'undefined';
 
   const addGamepad = (gamepad: Gamepad) => {
     gamepads.current = {
@@ -13,7 +14,9 @@ const useGamepads = (cb?: (data: GamepadRef) => void) => {
     };
 
     // Send data to provided callback
-    typeof cb === 'function' && cb(gamepads.current);
+    if (typeof cb === 'function') {
+      cb(gamepads.current);
+    }
   };
 
   /**
@@ -32,15 +35,13 @@ const useGamepads = (cb?: (data: GamepadRef) => void) => {
     const detectedGamepads = navigator.getGamepads
       ? navigator.getGamepads()
       : navigator.webkitGetGamepads
-      ? navigator.webkitGetGamepads()
-      : [];
+        ? navigator.webkitGetGamepads()
+        : [];
 
     // Loop through all existing controllers and add to the state
-    detectedGamepads.forEach(gamepad => {
-      const newGamepads = gamepad;
-
-      if (newGamepads && newGamepads !== null) {
-        addGamepad(newGamepads);
+    detectedGamepads.forEach((gamepad) => {
+      if (gamepad) {
+        addGamepad(gamepad);
       }
     });
   };
@@ -51,20 +52,23 @@ const useGamepads = (cb?: (data: GamepadRef) => void) => {
   useEffect(() => {
     window.addEventListener('gamepadconnected', connectGamepadHandler);
 
-    return () =>
+    return () => {
       window.removeEventListener('gamepadconnected', connectGamepadHandler);
+    };
   }, []);
 
   // Update gamepad state on each "tick"
-  const update = () => {
-    if (!haveGamepadEvents) {
+  const update = useCallback(() => {
+    if (isNotSsr) {
       scanGamepads();
     }
+
     request.current = requestAnimationFrame(update);
-  };
+  }, [isNotSsr]);
 
   useEffect(() => {
     request.current = requestAnimationFrame(update);
+
     return () => cancelAnimationFrame(request.current!);
   }, []);
 
