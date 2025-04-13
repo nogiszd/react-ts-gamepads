@@ -33,7 +33,7 @@ jobs:
         run: echo "name=build-dist" >> "$GITHUB_OUTPUT"
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-dist
           path: dist/
@@ -41,6 +41,7 @@ jobs:
   publish:
     needs: build
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
 
     steps:
       - name: Checkout repo
@@ -56,7 +57,7 @@ jobs:
         uses: bahmutov/npm-install@v1
 
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: build-dist
           path: dist/
@@ -65,3 +66,8 @@ jobs:
         run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+
+      - name: Delete artifact
+        uses: geekyego/delete-artifact@v5
+        with:
+          name: build-dist
