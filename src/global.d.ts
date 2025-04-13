@@ -38,7 +38,7 @@ declare global {
 
   interface Navigator {
     /**
-     * @deprecated WebKit now supports `getGamepads()`, do not use this!
+     * @deprecated WebKit now supports `getGamepads()`, left only for compatibility purposes.
      **/
     webkitGetGamepads?: () => Gamepad[];
   }

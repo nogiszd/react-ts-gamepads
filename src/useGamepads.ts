@@ -21,9 +21,10 @@ const useGamepads = (cb?: (data: GamepadRef) => void) => {
 
   /**
    * Gamepad connect listener handler
-   * @param {Event} e
+   * @param {Event} e Event object
+   * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/GamepadEvent}
    */
-  const connectGamepadHandler = (e: Event) => {
+  const connectGamepadHandler = (e: Event): void => {
     addGamepad((e as GamepadEvent).gamepad);
   };
 

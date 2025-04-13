@@ -31,10 +31,9 @@ const GamepadsProvider = ({ children }: PropsWithChildren<unknown>) => {
   /**
    * Gamepad connect listener handler
    * @param {Event} e Event object
-   * @returns {void}
    * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/GamepadEvent}
    */
-  const connectGamepadHandler = (e: Event) => {
+  const connectGamepadHandler = (e: Event): void => {
     addGamepad((e as GamepadEvent).gamepad);
   };
 
