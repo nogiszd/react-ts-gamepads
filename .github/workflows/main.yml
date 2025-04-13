@@ -65,6 +65,6 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
 
       - name: Delete artifact
-        uses: geekyego/delete-artifact@v5
+        uses: geekyeggo/delete-artifact@v5
         with:
           name: build-dist
