@@ -1,7 +1,7 @@
 declare global {
   interface Gamepad {
     /**
-     * Custom compatibility layer for browsers that do not support the standard.
+     * Custom compatibility layer for browsers that do not support the standard yet.
      * @borrows GamepadHapticActuator
      */
     vibrationActuator: readonly GamepadHapticActuator;
