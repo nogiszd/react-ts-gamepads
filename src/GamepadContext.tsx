@@ -28,6 +28,17 @@ const GamepadsProvider = ({ children }: PropsWithChildren<unknown>) => {
     [gamepads, setGamepads]
   );
 
+  const removeGamepad = useCallback(
+    (gamepad: Gamepad) => {
+      setGamepads((oldGamepads) => {
+        const newGamepads = { ...oldGamepads };
+        delete newGamepads[gamepad.index];
+        return newGamepads;
+      });
+    },
+    [setGamepads]
+  );
+
   /**
    * Gamepad connect listener handler
    * @param {Event} e Event object
@@ -35,6 +46,15 @@ const GamepadsProvider = ({ children }: PropsWithChildren<unknown>) => {
    */
   const connectGamepadHandler = (e: Event): void => {
     addGamepad((e as GamepadEvent).gamepad);
+  };
+
+  /**
+   * Gamepad disconnect listener handler
+   * @param {Event} e Event object
+   * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/GamepadEvent}
+   */
+  const disconnectGamepadHandler = (e: Event): void => {
+    removeGamepad((e as GamepadEvent).gamepad);
   };
 
   /**
@@ -57,15 +77,19 @@ const GamepadsProvider = ({ children }: PropsWithChildren<unknown>) => {
   }, [addGamepad]);
 
   /**
-   * Add event listener for gamepad connection
+   * Add event listeners for gamepad connection and disconnection
    */
   useEffect(() => {
     window.addEventListener('gamepadconnected', connectGamepadHandler);
+    window.addEventListener('gamepaddisconnected', disconnectGamepadHandler);
 
-    return window.removeEventListener(
-      'gamepadconnected',
-      connectGamepadHandler
-    );
+    return () => {
+      window.removeEventListener('gamepadconnected', connectGamepadHandler);
+      window.removeEventListener(
+        'gamepaddisconnected',
+        disconnectGamepadHandler
+      );
+    };
   });
 
   // Update gamepad state on each "tick"
