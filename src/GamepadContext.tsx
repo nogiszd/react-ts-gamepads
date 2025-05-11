@@ -16,6 +16,10 @@ const GamepadsProvider = ({ children }: PropsWithChildren<unknown>) => {
 
   const isNotSsr = typeof window !== 'undefined';
 
+  /**
+   * Add gamepad to the state
+   * @param {Gamepad} gamepad Gamepad object
+   */
   const addGamepad = useCallback(
     (gamepad: Gamepad) => {
       setGamepads((oldGamepads) => ({
@@ -28,6 +32,10 @@ const GamepadsProvider = ({ children }: PropsWithChildren<unknown>) => {
     [gamepads, setGamepads]
   );
 
+  /**
+   * Remove gamepad from the state
+   * @param {Gamepad} gamepad Gamepad object
+   */
   const removeGamepad = useCallback(
     (gamepad: Gamepad) => {
       setGamepads((oldGamepads) => {
@@ -92,7 +100,9 @@ const GamepadsProvider = ({ children }: PropsWithChildren<unknown>) => {
     };
   });
 
-  // Update gamepad state on each "tick"
+  /**
+   * Method for updating gamepad state on each "tick"
+   */
   const update = useCallback(() => {
     if (isNotSsr) {
       scanGamepads();

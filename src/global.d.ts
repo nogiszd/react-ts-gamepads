@@ -28,6 +28,10 @@ declare global {
 
   type GamepadHapticsResult = 'complete' | 'preempted';
 
+  /**
+   * @extends {GamepadHapticActuator}
+   * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/GamepadHapticActuator}
+   */
   interface GamepadHapticActuator {
     effects: readonly GamepadHapticEffectType[];
     playEffect<T extends GamepadHapticEffectType>(
